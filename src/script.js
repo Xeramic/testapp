@@ -1,0 +1,2 @@
+const xhr = new XMLHttpRequest();
+

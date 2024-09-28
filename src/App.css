@@ -1,38 +1,474 @@
-.App {
+@font-face {
+  font-family: "Ubuntu";
+  src: url("https://fonts.gstatic.com/s/ubuntu/v20/4iCs6KVjbNBYlgoKfw72.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(59, 66, 81);
+}
+
+.left-bar {
+  position: absolute;
+  width: 16%;
+  height: 100%;
+  background-color: rgb(42, 47, 58);
+}
+
+.contacts-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.bar-header {
+  margin: 2%;
+  display: flex;
+}
+
+.bar-header input {
+  font-size: 100%;
+  color: white;
+  font-family: "Ubuntu", sans-serif;
+  margin: auto;
+  padding-left: 3%;
+  width: 80%;
+  height: 30px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: rgb(27, 29, 36);
+}
+
+.bar-header input:focus {
+  outline: none;
+  outline: solid rgb(59, 66, 81) 2px;
+}
+
+.bar-header button {
+  width: 10%;
+  height: 8%;
+  margin-top: -1%;
+  margin-left: 1%;
+  font-size: 30px;
+  padding-bottom: 0.5%;
+  color: rgb(77, 86, 105);
+  background: none;
+  border: none
+}
+
+.bar-header button:hover {
+  color: rgb(71, 79, 97);
+}
+
+.contact-item {
+  width: 100%;
+  height: 75px;
+  display: flex;
+  background-color: rgb(42, 47, 58);
+  transition: all 0.2s;
+}
+
+.contact-item:hover {
+  background-color: rgb(50, 56, 72);
+}
+
+.contact-item:active {
+  background-color: rgb(47, 53, 67);
+}
+
+.contact-name {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin: 10px 3px;
+  color: rgb(128, 135, 155);
+  z-index: 2;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  margin: 7px;
+  border-radius: 100%;
+  z-index: 2;
+}
+
+.left-bar-menu {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  background-color: rgb(38, 42, 53);
+  z-index: 5;
+  margin-left: -300px;
+  transition: margin-left 0.5s;
+}
+
+.menu-open {
+  margin-left: 0;
+}
+
+.back-btn {
+  position: absolute;
+  margin-top: 10px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+}
+
+.back-btn img{
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-bar {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background-color: rgb(39, 44, 54);
+}
+
+#top-contact-name {
+  font-family: "Ubuntu", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  margin-left: 320px;
+  margin-top: 10px;
+  color: rgb(128, 135, 155);
+  z-index: 2;
+}
+
+.bottom-bar {
+  position: absolute;
+  bottom: 1%;
+  width: 100%;
+  height: 6%;
+  z-index: 10;
+}
+
+#msg-input {
+  font-size: 16px;
+  color: rgb(181, 189, 206);
+  font-family: "Ubuntu", sans-serif;
+  left: 50%;
+  padding-left: 0.5%;
+  width: 63%;
+  height: 65%;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  text-decoration: none;
+  background-color: rgb(27, 29, 36);
+
+  margin-left: 320px;
+}
+
+#msg-input:focus {
+  outline: none;
+  outline: solid rgb(75, 82, 97) 2px;
+}
+
+.right-bar {
+  position: absolute;
+  right: 0;
+  width: 14%;
+  height: 100%;
+  background-color: rgb(36, 40, 49);
+}
+
+#send-btn {
+  width: 40px;
+  height: 40px;
+  color: rgb(128, 135, 155);
+  font-size: 30px;
+  border-radius: 100%;
+  outline: none;
+  border: none;
+  background-color: rgb(36, 40, 49);
+  transition: background-color 0.2s;
+  margin-left: 20px;
+}
+
+#send-btn:hover {
+  background-color: rgb(41, 46, 60);
+}
+
+#send-btn:active {
+  background-color: rgb(36, 40, 49);
+}
+
+#send-btn input {
+  display: none;
+}
+
+.login-box {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 600px;
+  width: 30%;
+  transform: translate(-50%, -50%);
+  background-color: rgb(62, 65, 72);
+  padding: 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.login-text {
+  font-size: 26px;
+  color: white;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#name-input {
+  width: 100%;
+  height: 40px;
+  margin-top: 35px;
+  font-size: 24px;
+  background-color: rgb(78, 80, 86);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#name-input:focus {
+  outline: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.enter-name {
+  position: absolute;
+  font-size: 20px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.name-bar {
+  display: flex;
+  position: absolute;
+  margin-top: 150px;
+  width: 89%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#tag-input {
+  width: 100%;
+  height: 40px;
+  margin-top: 35px;
+  font-size: 24px;
+  background-color: rgb(78, 80, 86);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
+}
+
+#tag-input:focus {
+  outline: none;
+}
+
+.enter-tag {
+  position: absolute;
+  font-size: 20px;
+  color: white;
+}
+
+.tag-bar {
+  display: flex;
+  position: absolute;
+  margin-top: 250px;
+  width: 89%;
+}
+
+#password-input {
+  width: 100%;
+  height: 40px;
+  margin-top: 35px;
+  font-size: 24px;
+  background-color: rgb(78, 80, 86);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
+}
+
+#password-input:focus {
+  outline: none;
+}
+
+.enter-password {
+  position: absolute;
+  font-size: 20px;
+  color: white;
+}
+
+.password-bar {
+  display: flex;
+  position: absolute;
+  margin-top: 350px;
+  width: 89%;
+}
+
+.enter-login {
+  width: 100%;
+  height: 50px;
+  margin-top: 480px;
+  font-size: 24px;
+  background-color: rgb(78, 80, 86);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  transition: background-color 0.2s;
+}
+
+.enter-login:hover {
+  background-color: rgb(76, 78, 84);
+}
+
+.enter-login:active {
+  background-color: rgb(78, 80, 86);
+}
+
+#error-txt {
+  position: absolute;
+  margin-top: 50px;
+  font-size: 20px;
+  color: rgb(255, 51, 51);
+}
+
+.msg-box {
+  display: flex;
+  flex-direction: column-reverse;
+  position: absolute;
+  margin-left: 18%;
+  bottom: 7%;
+  width: 67%;
+  height: 85%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  z-index: -1;
+  scroll-snap-align: end;
+}
+
+.msg-box::-webkit-scrollbar {
+  width: .5rem ;
+  background: rgb(78, 80, 86);
+  border-radius: 50px;
+}
+
+.msg-box::-webkit-scrollbar-track-piece {
+  width: 0.1rem;
+}
+
+.msg-box::-webkit-scrollbar-thumb {
+  width: 0.5rem;
+  height: 1rem;
+ 
+  background-color: rgb(94, 96, 102);
+  border-radius: 50px;
+}
+
+.message-item {
+  margin: 10px;
+  padding: 10px;
+  width: 40%;
+  background-color: rgb(41, 47, 61);
+  font-family: "Ubuntu", sans-serif;
+  color: white;
+  border-radius: 10px;
+}
+
+#author {
+  color: rgb(96, 104, 121);
+}
+#author:hover {
+  cursor: pointer;
+}
+
+#content {
+  margin: 5px;
+}
+
+#date {
+  text-align: right;
+  padding-right: 5px;
+  color: rgb(96, 104, 121);
+}
+
+#addc-output {
+  color: brown;
+}
+
+#reg-txt {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+}
+
+#reg-txt a {
+  color: rgb(62, 127, 185);
+  text-decoration: underline;
+}
+
+#reg-txt a:hover {
+  cursor: pointer;
+}
+
+#reg-head {
+  display: none;
+}
+
+#login-head {
+  display: block;
+}
+
+#addc-input {
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 7%;
+  padding-left: 3%;
+  width: 70%;
+  height: 3%;
+  background-color: rgb(27, 29, 36);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  outline: none;
+  font-family: "Ubuntu", sans-serif;
+}
+
+#addc {
+  position: absolute;
+  color: rgb(128, 135, 155);
+  background-color: rgb(27, 29, 36);
+  margin-top: 5%;
+  margin-left: 84%;
+  width: 30px;
+  height: 30px;
+  font-size: 25px;
+  border-radius: 100%;
+  border: none;
+  transition: all 0.2s;
+}
+
+#addc:hover {
+  cursor: pointer;
+  background-color: rgb(31, 33, 41);
+}
+
+#addc:active {
+  background-color: rgb(19, 21, 26);
 }
